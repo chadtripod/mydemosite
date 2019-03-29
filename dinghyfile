@@ -1,0 +1,270 @@
+{
+	"application": "website", 
+	"pipelines": [
+		{
+			"name": "Pipeline as code",
+			"application": "website", 
+			"keepWaitingPipelines": false,
+			"lastModifiedBy": "away168",
+			"limitConcurrent": true,
+			"parameterConfig": [
+			{
+				"default": "2",
+				"description": "How many dev instances would you like?",
+				"label": "Number of Dev pods",
+				"name": "devcount",
+				"required": false
+			},
+			{
+				"default": "4",
+				"description": "How many prod instances would you like?",
+				"label": "Number of Prod pods",
+				"name": "prodcount"
+			}
+			],
+			"stages": [
+			{
+				"account": "gke-away",
+				"cloudProvider": "kubernetes",
+				"comments": "${trigger.tag} is being deployed",
+				"manifestArtifactAccount": "away168-github-artifact-account",
+				"manifests": [
+				{
+					"apiVersion": "apps/v1",
+					"kind": "Deployment",
+					"metadata": {
+						"labels": {
+							"app": "website"
+						},
+						"name": "website-dev",
+						"namespace": "dev"
+					},
+					"spec": {
+						"replicas": "${ #toInt( parameters.devcount ) }",
+						"selector": {
+							"matchLabels": {
+								"app": "website"
+							}
+						},
+						"template": {
+							"metadata": {
+								"labels": {
+									"app": "website"
+								}
+							},
+							"spec": {
+								"containers": [
+								{
+									"image": "away168/mysite:${ trigger.tag}",
+									"name": "mysite",
+									"ports": [
+									{
+										"containerPort": 80
+									}
+									]
+								}
+								]
+							}
+						}
+					}
+				},
+				{
+					"apiVersion": "v1",
+					"kind": "Service",
+					"metadata": {
+						"name": "website-dev-service",
+						"namespace": "dev"
+					},
+					"spec": {
+						"ports": [
+						{
+							"port": 80,
+							"protocol": "TCP",
+							"targetPort": 80
+						}
+						],
+						"selector": {
+							"app": "website"
+						},
+						"type": "LoadBalancer"
+					}
+				}
+				],
+				"moniker": {
+					"app": "website"
+				},
+				"name": "Deploy to GKE Dev",
+				"refId": "1",
+				"relationships": {
+					"loadBalancers": [],
+					"securityGroups": []
+				},
+				"requisiteStageRefIds": [],
+				"source": "text",
+				"type": "deployManifest"
+			},
+			{
+				"failPipeline": true,
+				"instructions": "Go Check the website (ingress)\nDid it deploy properly?",
+				"judgmentInputs": [
+				{
+					"value": "Roll-on to ${trigger.tag}"
+				},
+				{
+					"value": "Nope"
+				}
+				],
+				"name": "Manual Judgment",
+				"notifications": [],
+				"refId": "2",
+				"requisiteStageRefIds": [
+					"5",
+				"6"
+				],
+				"type": "manualJudgment"
+			},
+			{
+				"account": "gke-away-dev",
+				"cloudProvider": "kubernetes",
+				"location": "dev",
+				"manifestName": "deployment website-dev",
+				"mode": "static",
+				"name": "Undo Stage Rollout (Manifest)",
+				"numRevisionsBack": 1,
+				"refId": "3",
+				"requisiteStageRefIds": [
+					"2"
+				],
+				"stageEnabled": {
+					"expression": "${#judgment(\"Manual Judgment\") == \"Nope\"}",
+					"type": "expression"
+				},
+				"type": "undoRolloutManifest"
+			},
+			{
+				"account": "gke-away",
+				"cloudProvider": "kubernetes",
+				"manifestArtifactAccount": "away168-github-artifact-account",
+				"manifests": [
+				{
+					"apiVersion": "apps/v1",
+					"kind": "Deployment",
+					"metadata": {
+						"labels": {
+							"app": "website"
+						},
+						"name": "website-prod",
+						"namespace": "prod"
+					},
+					"spec": {
+						"replicas": "${ #toInt( parameters.prodcount )  }",
+						"selector": {
+							"matchLabels": {
+								"app": "website"
+							}
+						},
+						"template": {
+							"metadata": {
+								"labels": {
+									"app": "website"
+								}
+							},
+							"spec": {
+								"containers": [
+								{
+									"image": "away168/mysite:${trigger.tag}",
+									"name": "mysite",
+									"ports": [
+									{
+										"containerPort": 80
+									}
+									]
+								}
+								]
+							}
+						}
+					}
+				},
+				{
+					"apiVersion": "v1",
+					"kind": "Service",
+					"metadata": {
+						"name": "website-prod-service",
+						"namespace": "prod"
+					},
+					"spec": {
+						"ports": [
+						{
+							"port": 80,
+							"protocol": "TCP",
+							"targetPort": 80
+						}
+						],
+						"selector": {
+							"app": "website"
+						},
+						"type": "LoadBalancer"
+					}
+				}
+				],
+				"moniker": {
+					"app": "website"
+				},
+				"name": "Deploy to GKE Prod",
+				"refId": "4",
+				"relationships": {
+					"loadBalancers": [],
+					"securityGroups": []
+				},
+				"requisiteStageRefIds": [
+					"2"
+				],
+				"source": "text",
+				"stageEnabled": {
+					"expression": "${#judgment(\"Manual Judgment\") != \"Nope\"}",
+					"type": "expression"
+				},
+				"type": "deployManifest"
+			},
+			{
+				"name": "Automated UI Test",
+				"refId": "5",
+				"requisiteStageRefIds": [
+					"1"
+				],
+				"type": "wait",
+				"waitTime": 5
+			},
+			{
+				"name": "Automated UI Test B",
+				"refId": "6",
+				"requisiteStageRefIds": [
+					"1"
+				],
+				"type": "wait",
+				"waitTime": 5
+			},
+			{
+				"name": "Run Script",
+				"refId": "7",
+				"requisiteStageRefIds": [
+					"1"
+				],
+				"type": "wait",
+				"waitTime": 5
+			}
+			],
+			"triggers": [
+			{
+				"account": "docker-registry-away168",
+				"enabled": true,
+				"organization": "away168",
+				"registry": "index.docker.io",
+				"repository": "away168/mysite",
+				"tag": "",
+				"type": "docker"
+			}
+			],
+			"updateTs": "1553700631000"
+		}
+}
