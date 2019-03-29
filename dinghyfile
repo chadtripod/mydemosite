@@ -1,8 +1,8 @@
 {
-	"application": "website", 
-	"pipelines": [
-		{
-			"name": "Pipeline as code",
+  "application": "website", 
+  "pipelines": [
+    {
+      "name": "Pipeline as code",
 			"application": "website", 
 			"keepWaitingPipelines": false,
 			"lastModifiedBy": "away168",
