@@ -1,11 +1,11 @@
 {
-  "application": "MyPipelineasCode",
+  "application": "mypipelineascode",
   "pipelines": [
     {
-      "application": "yourspinnakerapplicationname",
+      "application": "mypipelineascode",
       "keepWaitingPipelines": false,
       "limitConcurrent": true,
-      "name": "Made By Armory Pipeline Templates",
+      "name": "My Pipeline as Code",
       "stages": [
         {
           "name": "Wait",
