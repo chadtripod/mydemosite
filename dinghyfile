@@ -8,11 +8,7 @@
       "name": "My Pipeline as Code",
       "stages": [
         {
-          "name": "Wait",
-          "refId": "1",
-          "requisiteStageRefIds": [],
-          "type": "wait",
-          "waitTime": 10
+          {{ module "wait.stage.module" }}
         }
       ],
       "triggers": []
