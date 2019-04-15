@@ -8,7 +8,7 @@
       "name": "My Pipeline as Code",
       "stages": [
         {
-          {{ module "wait.stage.module" }}
+          {{ module "wait.stage.module" "waitTime" 13 }}
         }
       ],
       "triggers": []
