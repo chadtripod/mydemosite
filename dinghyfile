@@ -16,7 +16,6 @@
           "waitTime": 10
         },
         {{module "wait.stage.module"
-          "refId" "2"
         }},
         {{
           module "wait.stage.module" 
