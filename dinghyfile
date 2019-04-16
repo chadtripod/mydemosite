@@ -22,7 +22,7 @@
           "name" "module wait"
           "waitTime" 20
           "requisiteStageRefIds" [
-            "1"
+            "101"
           ]
         }},
         {{
