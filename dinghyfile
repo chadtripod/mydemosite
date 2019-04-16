@@ -20,7 +20,6 @@
           module "wait.stage.module" 
           "name" "module wait" 
           "waitTime" 20
-          "refId" "2"
         }},
         {{
           module "manual.judgement.module"
