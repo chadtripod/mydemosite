@@ -15,7 +15,9 @@
           "type": "wait",
           "waitTime": 10
         },
-        {{module "wait.stage.module"}},
+        {{module "wait.stage.module"
+          "refId" "2"
+        }},
         {{
           module "wait.stage.module" 
           "refId" "3"
