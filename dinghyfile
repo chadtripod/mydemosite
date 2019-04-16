@@ -5,8 +5,16 @@
       "application": "mypipelineascode",
       "keepWaitingPipelines": false,
       "limitConcurrent": true,
-      "name": "My Pipeline as Code 4",
+      "name": "My Pipeline as Code 5",
       "stages": [
+        {
+          "name": "hard coded wait",
+          "refId": "1",
+          "requisiteStageRefIds": [],
+          "type": "wait",
+          "waitTime": 10}
+        },
+        {{module "wait.stage.module"}},
         {{module "wait.stage.module" "name" "module wait"}}
       ],
       "triggers": []
