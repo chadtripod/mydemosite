@@ -5,7 +5,7 @@
       "application": "mypipelineascode",
       "keepWaitingPipelines": false,
       "limitConcurrent": true,
-      "name": "My Pipeline as Code",
+      "name": "My Pipeline as Code 2",
       "stages": [
         {
           {{ module "wait.stage.module" "waitTime" 13 }}
