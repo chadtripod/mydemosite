@@ -20,7 +20,7 @@
           module "wait.stage.module" 
           "name" "module wait"
           "waitTime" 20
-          "requisiteStageRefIds": [
+          "requisiteStageRefIds" [
             "1"
           ]
         }}
