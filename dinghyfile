@@ -24,11 +24,6 @@
         }},
         {{
           module "manual.judgement.module"
-          "requisiteStageRefIds": [
-            "1",
-            "101",
-            "2"
-          ]
         }}
       ],
       "triggers": []
