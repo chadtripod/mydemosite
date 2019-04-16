@@ -26,7 +26,7 @@
           ]
         }},
         {{
-          module "manual.judgement.module"}}
+          module "manual.judgement.module"
         }}
       ],
       "triggers": []
