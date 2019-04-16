@@ -19,11 +19,10 @@
         }},
         {{
           module "wait.stage.module" 
-          "refId" "3"
           "name" "module wait"
           "waitTime" 20
           "requisiteStageRefIds" [
-            "101"
+            "1"
           ]
         }},
         {{
