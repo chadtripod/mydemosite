@@ -18,9 +18,8 @@
         {{module "wait.stage.module"}},
         {{
           module "wait.stage.module" 
-          "name" "module wait" 
+          "name" "module wait"
           "waitTime" 20
-          "refId": "2"
         }},
         {{
           module "manual.judgement.module"
