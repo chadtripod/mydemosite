@@ -7,7 +7,7 @@
       "limitConcurrent": true,
       "name": "My Pipeline as Code 4",
       "stages": [
-        {{module "wait.stage.module" name "module wait"}}
+        {{module "wait.stage.module" "name" "module wait"}}
       ],
       "triggers": []
     }
