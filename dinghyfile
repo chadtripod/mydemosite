@@ -15,18 +15,16 @@
           "type": "wait",
           "waitTime": 10
         },
-        {{module "wait.stage.module"
-        }},
         {{
           module "wait.stage.module" 
           "name" "module wait"
           "waitTime" 20
-          "requisiteStageRefIds" [
-            "101"
-          ]
         }},
         {{
           module "manual.judgement.module"
+          "requisiteStageRefIds" [
+            "101"
+          ]
         }}
       ],
       "triggers": []
