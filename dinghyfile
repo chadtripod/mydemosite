@@ -23,7 +23,8 @@
         {{
           module "manual.judgement.module"
           "requisiteStageRefIds" [
-            "101"
+            "101",
+            "1"
           ]
         }}
       ],
