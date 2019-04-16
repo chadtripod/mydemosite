@@ -20,6 +20,7 @@
           module "wait.stage.module" 
           "name" "module wait"
           "waitTime" 20
+          "refId" "2"
           "requisiteStageRefIds" [
             "1"
           ]
