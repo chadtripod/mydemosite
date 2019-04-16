@@ -20,9 +20,6 @@
           module "wait.stage.module" 
           "name" "module wait"
           "waitTime" 20
-        }},
-        {{
-          module "manual.judgement.module"
         }}
       ],
       "triggers": []
