@@ -5,7 +5,7 @@
       "application": "mypipelineascode",
       "keepWaitingPipelines": false,
       "limitConcurrent": true,
-      "name": "My Pipeline as Code 5",
+      "name": "My Pipeline as Code",
       "stages": [
         {
           "name": "hard coded wait",
