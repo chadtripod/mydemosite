@@ -24,6 +24,9 @@
           "requisiteStageRefIds" [
             "1"
           ]
+        }},
+        {{
+          module "manual.judgement.module"}}
         }}
       ],
       "triggers": []
