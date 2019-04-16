@@ -1,5 +1,6 @@
 {
   "application": "mypipelineascode",
+  "deleteStalePipelines": true,
   "pipelines": [
     {
       "application": "mypipelineascode",
@@ -19,6 +20,14 @@
           module "wait.stage.module" 
           "name" "module wait" 
           "waitTime" 20
+        }},
+        {{
+          module "manual.judgement.module"
+          "requisiteStageRefIds": [
+            "1",
+            "2",
+            "3"
+          ]
         }}
       ],
       "triggers": []
