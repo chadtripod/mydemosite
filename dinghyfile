@@ -5,15 +5,9 @@
       "application": "mypipelineascode",
       "keepWaitingPipelines": false,
       "limitConcurrent": true,
-      "name": "My Pipeline as Code 2",
+      "name": "My Pipeline as Code 3",
       "stages": [
-        {
-          "name": "wait",
-          "refId": "1",
-          "requisiteStageRefIds": [],
-          "type": "wait",
-          "waitTime": 13
-        }
+        {{module "wait.stage.module"}}
       ],
       "triggers": []
     }
