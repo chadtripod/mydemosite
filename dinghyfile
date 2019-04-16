@@ -5,9 +5,9 @@
       "application": "mypipelineascode",
       "keepWaitingPipelines": false,
       "limitConcurrent": true,
-      "name": "My Pipeline as Code 3",
+      "name": "My Pipeline as Code 4",
       "stages": [
-        {{module "wait.stage.module"}}
+        {{module "wait.stage.module" name "module wait"}}
       ],
       "triggers": []
     }
