@@ -15,7 +15,11 @@
           "waitTime": 10
         },
         {{module "wait.stage.module"}},
-        {{module "wait.stage.module" "name" "module wait" "waitTime" 20}}
+        {{
+          module "wait.stage.module" 
+          "name" "module wait" 
+          "waitTime" 20
+        }}
       ],
       "triggers": []
     }
