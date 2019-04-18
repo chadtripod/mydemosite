@@ -4,6 +4,7 @@ metadata:
   labels:
     app: website-helm
   name: {{ .Release.Name }}-website-helm-dev
+  namespace: {{ .Release.Namespace }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -24,6 +25,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Release.Name }}-website-helm-dev-service
+  namespace: {{ .Release.Namespace }}
 spec:
   ports:
     - port: 80
