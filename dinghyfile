@@ -1,5 +1,6 @@
 {
   "application": "mypipelineascode",
+  "deleteStalePipelines": true,
   "pipelines": [
     {
       "application": "mypipelineascode",
@@ -8,12 +9,24 @@
       "name": "My Pipeline as Code",
       "stages": [
         {
-          "name": "Wait",
+          "name": "hard coded wait",
           "refId": "1",
           "requisiteStageRefIds": [],
           "type": "wait",
           "waitTime": 10
-        }
+        },
+        {{
+          module "wait.stage.module" 
+          "name" "module wait"
+          "waitTime" 23
+        }},
+        {{
+          module "manual.judgement.module"
+          "requisiteStageRefIds" [
+            "101",
+            "1"
+          ]
+        }}
       ],
       "triggers": []
     }
