@@ -31,8 +31,8 @@ triggerdocker:
 		-H"Content-Type: application/json" $(SPINNAKER_API)/webhooks/webhook/spinhelmdemo \
 		-d '{"artifacts": [{"type": "docker/image", "name": "$(CHART_NAME)", "reference": "$(DOCKER_REPO):$(APP_VERSION)", "kind": "docker"}]}'
 
-triggerchart:
-	curl -L -vvv -X POST \
+#triggerchart:
+#	curl -L -vvv -X POST \
 		-k \
 		-H"Content-Type: application/json" $(SPINNAKER_API)/webhooks/webhook/spinhelmdemo \
 		-d '{"artifacts": [{"type": "s3/object", "name": "s3://$(CHART_BUCKET)/packages/spin-helm-demo-0.1.0.tgz", "reference": "s3://$(CHART_BUCKET)/packages/spin-helm-demo-$(CHART_VERSION).tgz", "kind": "s3"}]}'
