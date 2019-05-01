@@ -7,7 +7,7 @@ replicaCount: 1
 image:
   name: mysite
   repository: away168/mysite
-  tag: 4.15b
+  tag: 4.23b
   pullPolicy: IfNotPresent
 
 nameOverride: ""
