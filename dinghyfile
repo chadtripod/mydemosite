@@ -18,7 +18,7 @@
         {{
           module "wait.stage.module" 
           "name" "module wait"
-          "waitTime" 7
+          "waitTime" 25
         }},
         {{
           module "manual.judgement.module"
