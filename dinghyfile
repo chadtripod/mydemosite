@@ -1,6 +1,6 @@
 {
   "application": "mypipelineascode",
-  "deleteStalePipelines": true,
+  "deleteStalePipelines": false,
   "pipelines": [
     {
       "application": "mypipelineascode",
