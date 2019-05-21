@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: website
+  name: website-dev
+  namespace: dev
+spec:
+  replicas: '${ #toInt( parameters.devcount ) }'
+  selector:
+    matchLabels:
+      app: website
+  template:
+    metadata:
+      labels:
+        app: website
+    spec:
+      containers:
+        - image: 'away168/mysite:${ trigger.tag}'
+          name: mysite
+          ports:
+            - containerPort: 80
