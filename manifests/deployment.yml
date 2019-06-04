@@ -16,7 +16,7 @@ spec:
         app: website
     spec:
       containers:
-        - image: 'away168/mysite:${ trigger.tag}'
+        - image: 'away168/mysite'
           name: mysite
           ports:
             - containerPort: 80
