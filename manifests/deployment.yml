@@ -6,7 +6,7 @@ metadata:
   name: website-dev
   namespace: dev
 spec:
-  replicas: '${ #toInt( parameters.devcount ) }'
+  replicas: 1
   selector:
     matchLabels:
       app: website
@@ -16,7 +16,7 @@ spec:
         app: website
     spec:
       containers:
-        - image: 'away168/mysite:${ trigger.tag}'
+        - image: 'away168/mysite'
           name: mysite
           ports:
             - containerPort: 80
