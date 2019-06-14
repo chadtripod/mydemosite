@@ -1,9 +1,9 @@
 {
-  "application": "mypipelineascode",
+  "application": "datalayer",
   "deleteStalePipelines": true,
   "pipelines": [
     {
-      "application": "mypipelineascode",
+      "application": "datalayer",
       "keepWaitingPipelines": false,
       "limitConcurrent": true,
       "name": "My Pipeline as Code",
