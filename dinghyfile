@@ -13,7 +13,7 @@
           "refId": "1",
           "requisiteStageRefIds": [],
           "type": "wait",
-          "waitTime": 23
+          "waitTime": 13
         },
         {{
           module "wait.stage.module" 
