@@ -1,9 +1,9 @@
 {
-  "application": "mypipelineascode",
+  "application": "datalayer",
   "deleteStalePipelines": true,
   "pipelines": [
     {
-      "application": "mypipelineascode",
+      "application": "datalayer",
       "keepWaitingPipelines": false,
       "limitConcurrent": true,
       "name": "My Pipeline as Code",
@@ -13,12 +13,12 @@
           "refId": "1",
           "requisiteStageRefIds": [],
           "type": "wait",
-          "waitTime": 8
+          "waitTime": 10
         },
         {{
           module "wait.stage.module" 
-          "name" "module wait"
-          "waitTime" 17
+          "name" "module july01 wait"
+          "waitTime" 6
         }},
         {{
           module "manual.judgement.module"
