@@ -17,8 +17,8 @@
         },
         {{
           module "wait.stage.module" 
-          "name" "module july01 wait"
-          "waitTime" 6
+          "name" "module july16 wait"
+          "waitTime" 16
         }},
         {{
           module "manual.judgement.module"
