@@ -76,7 +76,7 @@
                   "spec": {
                     "containers": [
                       {
-                        "image": "nginx:latest",
+                        "image": "away168/datalayer:1.0",
                         "name": "datalayer",
                         "ports": [
                           {
@@ -100,6 +100,73 @@
             "securityGroups": []
           },
           "requisiteStageRefIds": [],
+          "source": "text",
+          "trafficManagement": {
+            "enabled": false,
+            "options": {
+              "enableTraffic": false,
+              "namespace": null,
+              "services": [],
+              "strategy": null
+            }
+          },
+          "type": "deployManifest"
+        },
+        {
+          "account": "gke-away",
+          "cloudProvider": "kubernetes",
+          "manifestArtifactAccount": "embedded-artifact",
+          "manifests": [
+            {
+              "apiVersion": "apps/v1",
+              "kind": "Deployment",
+              "metadata": {
+                "labels": {
+                  "app": "datalayer"
+                },
+                "name": "datalayer",
+                "namespace": "prod"
+              },
+              "spec": {
+                "replicas": 1,
+                "selector": {
+                  "matchLabels": {
+                    "app": "datalayer"
+                  }
+                },
+                "template": {
+                  "metadata": {
+                    "labels": {
+                      "app": "datalayer"
+                    }
+                  },
+                  "spec": {
+                    "containers": [
+                      {
+                        "image": "away168/datalayer:1.0",
+                        "name": "datalayer",
+                        "ports": [
+                          {
+                            "containerPort": 80
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ],
+          "moniker": {
+            "app": "datalayer"
+          },
+          "name": "Deploy Prod",
+          "refId": "1",
+          "relationships": {
+            "loadBalancers": [],
+            "securityGroups": []
+          },
+          "requisiteStageRefIds": ["1"],
           "source": "text",
           "trafficManagement": {
             "enabled": false,
