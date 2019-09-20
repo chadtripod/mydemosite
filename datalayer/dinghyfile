@@ -1,0 +1,189 @@
+{
+  "application": "datalayer",
+  "deleteStalePipelines": true,
+  "pipelines": [
+    {
+      "application": "datalayer",
+      "keepWaitingPipelines": false,
+      "limitConcurrent": true,
+      "name": "My Pipeline as Code",
+      "stages": [
+        {
+          "name": "hard coded wait",
+          "refId": "1",
+          "requisiteStageRefIds": [],
+          "type": "wait",
+          "waitTime": 30
+        },
+        {{
+          module "wait.stage.module" 
+          "account" "gke-away"
+          "name" "Deploy to Dev"
+          "namespace" "dev"
+          "refId" "deployToDev"
+        }},
+        {{
+          module "manual.judgement.module"
+          "requisiteStageRefIds" [
+              "101",
+              "1"
+            ]
+        }}
+      ],
+      "triggers": []
+    },
+    {
+      "application": "datalayer",
+      "name": "Deploy Datalayer",
+      "keepWaitingPipelines": false,
+      "lastModifiedBy": "away168",
+      "limitConcurrent": true,
+      "parameterConfig": [
+        {
+          "default": "1",
+          "description": "how many dev instances",
+          "label": "Dev Instances",
+          "name": "devcount"
+        }
+      ],
+      "stages": [
+        {
+          "account": "gke-away",
+          "cloudProvider": "kubernetes",
+          "manifestArtifactAccount": "embedded-artifact",
+          "manifests": [
+            {
+              "apiVersion": "apps/v1",
+              "kind": "Deployment",
+              "metadata": {
+                "labels": {
+                  "app": "datalayer"
+                },
+                "name": "datalayer",
+                "namespace": "dev"
+              },
+              "spec": {
+                "replicas": 1,
+                "selector": {
+                  "matchLabels": {
+                    "app": "datalayer"
+                  }
+                },
+                "template": {
+                  "metadata": {
+                    "labels": {
+                      "app": "datalayer"
+                    }
+                  },
+                  "spec": {
+                    "containers": [
+                      {
+                        "image": "away168/datalayer:1.0",
+                        "name": "datalayer",
+                        "ports": [
+                          {
+                            "containerPort": 80
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ],
+          "moniker": {
+            "app": "datalayer"
+          },
+          "name": "Deploy Dev",
+          "refId": "1",
+          "relationships": {
+            "loadBalancers": [],
+            "securityGroups": []
+          },
+          "requisiteStageRefIds": [],
+          "source": "text",
+          "trafficManagement": {
+            "enabled": false,
+            "options": {
+              "enableTraffic": false,
+              "namespace": null,
+              "services": [],
+              "strategy": null
+            }
+          },
+          "type": "deployManifest"
+        },
+        {
+          "account": "gke-away",
+          "cloudProvider": "kubernetes",
+          "manifestArtifactAccount": "embedded-artifact",
+          "manifests": [
+            {
+              "apiVersion": "apps/v1",
+              "kind": "Deployment",
+              "metadata": {
+                "labels": {
+                  "app": "datalayer"
+                },
+                "name": "datalayer",
+                "namespace": "prod"
+              },
+              "spec": {
+                "replicas": 1,
+                "selector": {
+                  "matchLabels": {
+                    "app": "datalayer"
+                  }
+                },
+                "template": {
+                  "metadata": {
+                    "labels": {
+                      "app": "datalayer"
+                    }
+                  },
+                  "spec": {
+                    "containers": [
+                      {
+                        "image": "away168/datalayer:1.0",
+                        "name": "datalayer",
+                        "ports": [
+                          {
+                            "containerPort": 80
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ],
+          "moniker": {
+            "app": "datalayer"
+          },
+          "name": "Deploy Prod",
+          "refId": "1",
+          "relationships": {
+            "loadBalancers": [],
+            "securityGroups": []
+          },
+          "requisiteStageRefIds": ["1"],
+          "source": "text",
+          "trafficManagement": {
+            "enabled": false,
+            "options": {
+              "enableTraffic": false,
+              "namespace": null,
+              "services": [],
+              "strategy": null
+            }
+          },
+          "type": "deployManifest"
+        }
+      ],
+      "triggers": [],
+      "updateTs": "1557246121000"
+    }
+  ]
+}
