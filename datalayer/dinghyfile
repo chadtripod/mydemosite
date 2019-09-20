@@ -16,11 +16,9 @@
           "waitTime": 30
         },
         {{
-          module "wait.stage.module" 
-          "account" "gke-away"
-          "name" "Deploy to Dev"
-          "namespace" "dev"
-          "refId" "deployToDev"
+          module "deploy.stage.module" 
+          "name" "module Sep20 wait"
+          "waitTime" 7
         }},
         {{
           module "manual.judgement.module"
