@@ -22,9 +22,7 @@
         }},
         {{
           module "manual.judgement.module"
-          "requisiteStageRefIds" [
-              "hardwait"
-            ]
+          "requisiteStageRefIds" ["hardwait"]
         }}
       ],
       "triggers": []
