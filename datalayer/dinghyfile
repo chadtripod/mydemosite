@@ -33,14 +33,14 @@
         },
         {{
           module "wait.stage.module" 
-          "name" "module Sep20 wait"
+          "name" "module wait"
           "waitTime" 108
         }},
         {{
           module "manual.judgement.module"
           "name" "module judgment"
           "instructions" "Did the manual tests pass?"
-          "requisiteStageRefIds" []
+          "requisiteStageRefIds" ["module wait"]
         }}
       ],
       "triggers": []
