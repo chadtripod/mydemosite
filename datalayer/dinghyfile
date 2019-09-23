@@ -9,7 +9,7 @@
       "name": "My Pipeline as Code",
       "stages": [
         {
-          "name": "hard coded wait",
+          "name": "Wait",
           "refId": "hardwait",
           "requisiteStageRefIds": [],
           "type": "wait",
@@ -21,10 +21,10 @@
           "instructions": "Does this look right?",
           "judgmentInputs": [
             {
-              "value": "Oh Yeah"
+              "value": "Yes"
             },
             {
-              "value": "Nah"
+              "value": "No"
             }
           ],
           "refId": "102",
