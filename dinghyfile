@@ -2,7 +2,7 @@
   "application": "website",
   "globals": {
     "waitTime": "9"
-  }
+  },
   "deleteStalePipelines": false,
   "pipelines": [
     {
