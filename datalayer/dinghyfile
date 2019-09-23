@@ -16,7 +16,7 @@
           "waitTime": 30
         },
         {{
-          module "deploy.stage.module" 
+          module "wait.stage.module" 
           "name" "module Sep20 wait"
           "waitTime" 7
         }},
