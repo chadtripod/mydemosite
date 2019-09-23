@@ -10,7 +10,7 @@
       "stages": [
         {
           "name": "hard coded wait",
-          "refId": "1",
+          "refId": "hardwait",
           "requisiteStageRefIds": [],
           "type": "wait",
           "waitTime": 30
@@ -23,8 +23,7 @@
         {{
           module "manual.judgement.module"
           "requisiteStageRefIds" [
-              "101",
-              "1"
+              "hardwait"
             ]
         }}
       ],
