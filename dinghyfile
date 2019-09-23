@@ -99,7 +99,7 @@
           "type": "manualJudgment"
         },
         {
-          "account": "gke-away-dev",
+          "account": "gke-away",
           "cloudProvider": "kubernetes",
           "location": "dev",
           "manifestName": "deployment website-dev",
@@ -116,6 +116,15 @@
           },
           "type": "undoRolloutManifest"
         },
+        {{
+          module "deploy.stage.module" 
+          "account" "gke-away"
+          "name" "Deploy to GKE Prod"
+          "namespace" "prod"
+          "refId" "deployProd"
+          "requisiteStageRefIds" ["2"]
+          "stageEnabledExpression" "${#judgment(\"Manual Judgment\") != \"Nope\"}"
+        }},
         {
           "account": "gke-away",
           "cloudProvider": "kubernetes",
@@ -232,7 +241,7 @@
       "triggers": [
         {
           "account": "docker-registry-away168",
-          "enabled": true,
+          "enabled": false,
           "organization": "away168",
           "registry": "index.docker.io",
           "repository": "away168/mysite",
