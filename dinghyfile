@@ -195,6 +195,7 @@
         {{
           module "wait.stage.module"
           "name" "Deploy to Private K8s"
+          "waitTime" 15
           "requisiteStageRefIds" ["2"]
         }},
         {{
