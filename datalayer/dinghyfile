@@ -28,10 +28,7 @@
             }
           ],
           "refId": "102",
-          "requisiteStageRefIds": {
-            ["hardwait"]
-          },
-          "notifications": [],
+          "requisiteStageRefIds": ["hardwait"],
           "type": "manualJudgment"
         },
         {{
