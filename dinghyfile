@@ -14,7 +14,7 @@
       "limitConcurrent": true,
       "parameterConfig": [
         {
-          "default": "10",
+          "default": "1",
           "description": "How many dev instances would you like?",
           "label": "Number of Dev pods",
           "name": "devcount",
@@ -195,6 +195,14 @@
           },
           "type": "deployManifest"
         },
+        {{
+          module "deploy.stage.module" 
+          "account" "gke-away"
+          "name" "Deploy to Prod"
+          "namespace" "prod"
+          "refId" "deployProd"
+          "requisiteStageRefIds" ["2"]
+        }},
         {{
           module "wait.stage.module"
           "name" "Deploy to Private K8s"
