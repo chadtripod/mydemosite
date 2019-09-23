@@ -1,10 +1,10 @@
 {
-  "application": "website2",
+  "application": "website",
   "deleteStalePipelines": true,
   "pipelines": [
     {
-      "application": "website2",
-      "name": "Deploy and Check",
+      "application": "website",
+      "name": "Deploy and Check [Dinghy]",
       "expectedArtifacts": [],
       "keepWaitingPipelines": false,
       "lastModifiedBy": "anonymous",
@@ -30,8 +30,41 @@
           "account" "gke-away"
           "name" "Deploy to Dev"
           "namespace" "dev"
-          "refId" "deployToDev"
         }},
+        {
+          "continuePipeline": false,
+          "failPipeline": true,
+          "job": "IntegrationTest-Website",
+          "master": "my-jenkins-master",
+          "name": "Automated Test (via Jenkins)",
+          "parameters": {
+            "DemoBoolean": true,
+            "DemoString": "Foo"
+          },
+          "propertyFile": "build.properties",
+          "refId": "IntegrationTest",
+          "requisiteStageRefIds": [
+            "deployToDev"
+          ],
+          "type": "jenkins"
+        },
+        {
+          "continuePipeline": false,
+          "failPipeline": true,
+          "job": "SecurityScan",
+          "master": "my-jenkins-master",
+          "name": "Security Scan",
+          "parameters": {
+            "DependencyCheck": true,
+            "Environment": "${trigger.user}"
+          },
+          "propertyFile": "scan.properties",
+          "refId": "SecurityScan",
+          "requisiteStageRefIds": [
+            "deployToDev"
+          ],
+          "type": "jenkins"
+        },
         {
           "failPipeline": true,
           "instructions": "Go Check the website (ingress)\nDid it deploy properly?",
@@ -58,8 +91,8 @@
           ],
           "refId": "2",
           "requisiteStageRefIds": [
-            "13",
-            "14"
+            "SecurityScan",
+            "IntegrationTest"
           ],
           "sendNotifications": true,
           "type": "manualJudgment"
@@ -193,40 +226,6 @@
           ],
           "type": "wait",
           "waitTime": 15
-        },
-        {
-          "continuePipeline": false,
-          "failPipeline": true,
-          "job": "IntegrationTest-Website",
-          "master": "my-jenkins-master",
-          "name": "Automated Test (via Jenkins)",
-          "parameters": {
-            "DemoBoolean": true,
-            "DemoString": "Foo"
-          },
-          "propertyFile": "build.properties",
-          "refId": "13",
-          "requisiteStageRefIds": [
-            "1"
-          ],
-          "type": "jenkins"
-        },
-        {
-          "continuePipeline": false,
-          "failPipeline": true,
-          "job": "SecurityScan",
-          "master": "my-jenkins-master",
-          "name": "Security Scan",
-          "parameters": {
-            "DependencyCheck": true,
-            "Environment": "${trigger.user}"
-          },
-          "propertyFile": "scan.properties",
-          "refId": "14",
-          "requisiteStageRefIds": [
-            "1"
-          ],
-          "type": "jenkins"
         }
       ],
       "triggers": [
