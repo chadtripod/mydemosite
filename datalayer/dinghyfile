@@ -41,6 +41,7 @@
           "name" "module judgment"
           "instructions" "Did the manual tests pass?"
           "requisiteStageRefIds" ["module wait"]
+          "judgmentInputs" [{"value": "But of course"}, {"value": "Meh"}]
         }}
       ],
       "triggers": []
