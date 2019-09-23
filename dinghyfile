@@ -1,8 +1,5 @@
 {
   "application": "website",
-  "globals": {
-      "waitTime": "10"
-  },
   "deleteStalePipelines": false,
   "pipelines": [
     {
