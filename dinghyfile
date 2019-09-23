@@ -69,38 +69,13 @@
           ],
           "type": "jenkins"
         },
-        {
-          "failPipeline": true,
-          "instructions": "Go Check the website (ingress)\nDid it deploy properly?",
-          "judgmentInputs": [
-            {
-              "value": "Roll-on to ${trigger.tag}"
-            },
-            {
-              "value": "Nope"
-            }
-          ],
-          "name": "Manual Judgment",
-          "notifications": [
-            {
-              "address": "se-notifications",
-              "level": "stage",
-              "type": "slack",
-              "when": [
-                "manualJudgment",
-                "manualJudgmentContinue",
-                "manualJudgmentStop"
-              ]
-            }
-          ],
-          "refId": "2",
-          "requisiteStageRefIds": [
-            "SecurityScan",
-            "IntegrationTest"
-          ],
-          "sendNotifications": true,
-          "type": "manualJudgment"
-        },
+        {{
+          module "manual.judgement.module"
+          "name" "Manual Judgment"
+          "instructions" "Check the website; Did it deploy properly?"
+          "requisiteStageRefIds" ["SecurityScan","IntegrationTest"]
+          "judgmentInputs" [{"value": "But of course"}, {"value": "No"}]
+        }},
         {
           "account": "gke-away",
           "cloudProvider": "kubernetes",
@@ -111,10 +86,10 @@
           "numRevisionsBack": 1,
           "refId": "3",
           "requisiteStageRefIds": [
-            "2"
+            "Manual Judgment"
           ],
           "stageEnabled": {
-            "expression": "${#judgment(\"Manual Judgment\") == \"Nope\"}",
+            "expression": "${#judgment(\"Manual Judgment\") == \"No\"}",
             "type": "expression"
           },
           "type": "undoRolloutManifest"
@@ -174,7 +149,7 @@
             "securityGroups": []
           },
           "requisiteStageRefIds": [
-            "2"
+            "Manual Judgment"
           ],
           "skipExpressionEvaluation": false,
           "source": "text",
@@ -201,33 +176,33 @@
           "name" "Deploy to Prod"
           "namespace" "prod"
           "refId" "deployProd"
-          "requisiteStageRefIds" ["2"]
+          "requisiteStageRefIds" ["Manual Judgment"]
         }},
         {{
           module "wait.stage.module"
           "name" "Deploy to Private K8s"
           "waitTime" 15
-          "requisiteStageRefIds" ["2"]
+          "requisiteStageRefIds" ["Manual Judgment"]
         }},
         {{
           module "wait.stage.module"
           "name" "Deploy to AKS Prod"
-          "requisiteStageRefIds" ["2"]
+          "requisiteStageRefIds" ["Manual Judgment"]
         }},
         {{
           module "wait.stage.module"
           "name" "Deploy to EKS Prod"
-          "requisiteStageRefIds" ["2"]
+          "requisiteStageRefIds" ["Manual Judgment"]
         }},
         {{
           module "wait.stage.module"
           "name" "Deploy to PKS K8s"
-          "requisiteStageRefIds" ["2"]
+          "requisiteStageRefIds" ["Manual Judgment"]
         }},
         {{
           module "wait.stage.module"
           "name" "Deploy to OpenShift K8s"
-          "requisiteStageRefIds" ["2"]
+          "requisiteStageRefIds" ["Manual Judgment"]
         }}
       ],
       "triggers": [
