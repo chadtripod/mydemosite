@@ -30,7 +30,7 @@
           "account" "gke-away"
           "name" "Deploy to Dev"
           "namespace" "dev"
-          "refId" "1"
+          "refId" "deployDev"
         }},
         {
           "continuePipeline": false,
@@ -45,7 +45,7 @@
           "propertyFile": "build.properties",
           "refId": "IntegrationTest",
           "requisiteStageRefIds": [
-            "1"
+            "deployDev"
           ],
           "type": "jenkins"
         },
@@ -62,7 +62,7 @@
           "propertyFile": "scan.properties",
           "refId": "SecurityScan",
           "requisiteStageRefIds": [
-            "1"
+            "deployDev"
           ],
           "type": "jenkins"
         },
