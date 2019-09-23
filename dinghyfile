@@ -116,14 +116,6 @@
           },
           "type": "undoRolloutManifest"
         },
-        {{
-          module "deploy.stage.module" 
-          "account" "gke-away"
-          "name" "Deploy to GKE Prod"
-          "namespace" "prod"
-          "refId" "deployProd"
-          "requisiteStageRefIds" ["2"]
-        }},
         {
           "account": "gke-away",
           "cloudProvider": "kubernetes",
