@@ -177,7 +177,7 @@
           "namespace" "prod"
           "refId" "deployProd"
           "requisiteStageRefIds" ["Manual Judgment"]
-          "stageEnabledExpression" "${#judgment(\"Manual Judgment\") != \"No\"}"
+          "stageEnabledExpression" "${#judgment(\'Manual Judgment\') != \'No\'}"
         }},
         {{
           module "wait.stage.module"
