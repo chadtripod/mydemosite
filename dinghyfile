@@ -1,5 +1,8 @@
 {
   "application": "website",
+  "globals": {
+      "waitTime": "10",
+  },
   "deleteStalePipelines": false,
   "pipelines": [
     {
@@ -195,45 +198,28 @@
         {{
           module "wait.stage.module"
           "name" "Deploy to Private K8s"
-          "waitTime" 15
           "requisiteStageRefIds" ["2"]
         }},
-        {
-          "name": "Deploy to AKS Prod",
-          "refId": "8",
-          "requisiteStageRefIds": [
-            "2"
-          ],
-          "type": "wait",
-          "waitTime": 10
-        },
-        {
-          "name": "Deploy to AWS Prod",
-          "refId": "9",
-          "requisiteStageRefIds": [
-            "2"
-          ],
-          "type": "wait",
-          "waitTime": 15
-        },
-        {
-          "name": "Deploy to PKS Prod",
-          "refId": "10",
-          "requisiteStageRefIds": [
-            "2"
-          ],
-          "type": "wait",
-          "waitTime": 15
-        },
-        {
-          "name": "Deploy to OpenShift Prod",
-          "refId": "11",
-          "requisiteStageRefIds": [
-            "2"
-          ],
-          "type": "wait",
-          "waitTime": 15
-        }
+        {{
+          module "wait.stage.module"
+          "name" "Deploy to AKS Prod"
+          "requisiteStageRefIds" ["2"]
+        }},
+        {{
+          module "wait.stage.module"
+          "name" "Deploy to EKS Prod"
+          "requisiteStageRefIds" ["2"]
+        }},
+        {{
+          module "wait.stage.module"
+          "name" "Deploy to PKS K8s"
+          "requisiteStageRefIds" ["2"]
+        }},
+        {{
+          module "wait.stage.module"
+          "name" "Deploy to OpenShift K8s"
+          "requisiteStageRefIds" ["2"]
+        }}
       ],
       "triggers": [
         {
