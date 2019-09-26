@@ -72,7 +72,7 @@
         {{
           module "manual.judgement.module"
           "name" "Manual Judgment"
-          "instructions" "Check the website; Did it deploy properly?"
+          "instructions" "Check the website. Did it deploy properly?"
           "requisiteStageRefIds" ["SecurityScan","IntegrationTest"]
           "judgmentInputs" [{"value": "But of course"}, {"value": "No"}]
         }},
