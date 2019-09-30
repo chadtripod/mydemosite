@@ -1,0 +1,13 @@
+{
+  "namespaces": [
+    {
+      "namespace": "devtest1"
+    },
+    {
+      "namespace": "devtest2"
+    },
+    {
+      "namespace": "devtest3"
+    }
+  ]
+}
