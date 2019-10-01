@@ -1,13 +1,13 @@
 {
   "namespaces": [
     {
-      "namespace": "devtestoct1"
+      "namespace": "devtest1"
     },
     {
-      "namespace": "devtestoct12"
+      "namespace": "devtest2"
     },
     {
-      "namespace": "devtestoct13"
+      "namespace": "devtest3"
     }
   ]
 }
