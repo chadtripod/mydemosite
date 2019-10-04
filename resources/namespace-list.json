@@ -1,13 +1,13 @@
 {
   "namespaces": [
     {
-      "namespace": "devtest1hijustin"
+      "namespace": "devTeamRed"
     },
     {
-      "namespace": "devtest2hilee"
+      "namespace": "devTeamGold"
     },
     {
-      "namespace": "devtest3hichad"
+      "namespace": "devTeamBlue"
     }
   ]
 }
