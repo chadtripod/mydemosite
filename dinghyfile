@@ -31,7 +31,7 @@
         {{
           module "deploy.stage.module" 
           "account" "gke-away"
-          "name" "Deploy to Dev Oct-01-2019"
+          "name" "Deploy to Dev Oct-22-2019"
           "namespace" "dev"
           "refId" "deployDev"
         }},
