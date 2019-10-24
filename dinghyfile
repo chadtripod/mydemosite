@@ -1,5 +1,6 @@
 {
   "application": "website",
+  "email": away@armory.io,
   "globals": {
     "waitTime": "15"
   },
