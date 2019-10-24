@@ -1,5 +1,5 @@
 {
-  "application": "website",
+  "application": "websitedinghy",
   "email": away@armory.io,
   "globals": {
     "waitTime": "15"
@@ -7,7 +7,7 @@
   "deleteStalePipelines": false,
   "pipelines": [
     {
-      "application": "website",
+      "application": "websitedinghy",
       "name": "Deploy and Check [Dinghy]",
       "expectedArtifacts": [],
       "keepWaitingPipelines": false,
